@@ -30,9 +30,8 @@ const App = () => {
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
     if (!Object.keys(validationErrors).length) {
       tableData[row.index] = values;
-      //send/receive api updates here, then refetch or update local table data for re-render
       setTableData([...tableData]);
-      exitEditingMode(); //required to exit editing mode and close modal
+      exitEditingMode();
     }
   };
 
@@ -42,7 +41,6 @@ const App = () => {
 
   const handleDeleteRow = useCallback(
     (row) => {
-      //send api delete request here, then refetch or update local table data for re-render
       tableData.splice(row.index, 1);
       setTableData([...tableData]);
     },
@@ -62,13 +60,11 @@ const App = () => {
               ? validatePhone(+event.target.value)
               : validateRequired(event.target.value);
           if (!isValid) {
-            //set validation error for cell if invalid
             setValidationErrors({
               ...validationErrors,
               [cell.id]: `${cell.column.columnDef.header} is required`,
             });
           } else {
-            //remove validation error for cell if valid
             delete validationErrors[cell.id];
             setValidationErrors({
               ...validationErrors,
@@ -86,7 +82,7 @@ const App = () => {
         accessorKey: 'id',
         header: 'ID',
         enableColumnOrdering: false,
-        enableEditing: false, //disable editing on this column
+        enableEditing: false, 
         enableSorting: false,
         size: 80,
       },
@@ -151,7 +147,7 @@ const App = () => {
         accessorKey: 'state',
         header: 'State',
         muiTableBodyCellEditTextFieldProps: {
-          select: true, //change to select for a dropdown
+          select: true,
           children: states.map((state) => (
             <MenuItem key={state} value={state}>
               {state}
@@ -179,7 +175,7 @@ const App = () => {
         }}
         columns={columns}
         data={tableData}
-        editingMode="modal" //default
+        editingMode="modal"
         enableColumnOrdering
         enableEditing
         onEditingRowSave={handleSaveRowEdits}
