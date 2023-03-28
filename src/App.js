@@ -217,7 +217,6 @@ const App = () => {
   );
 };
 
-//example of creating a mui dialog modal for creating new rows
 export const CreateNewAccountModal = ({ open, columns, onClose, onSubmit }) => {
   const [values, setValues] = useState(() =>
     columns.reduce((acc, column) => {
@@ -227,7 +226,6 @@ export const CreateNewAccountModal = ({ open, columns, onClose, onSubmit }) => {
   );
 
   const handleSubmit = () => {
-    //put your validation logic here
     onSubmit(values);
     onClose();
   };
